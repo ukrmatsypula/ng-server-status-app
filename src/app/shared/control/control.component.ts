@@ -1,4 +1,11 @@
-import { Component, input, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  input,
+  ViewEncapsulation,
+  HostListener,
+  inject,
+  ElementRef,
+} from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -9,8 +16,15 @@ import { Component, input, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
   host: {
     class: 'control',
+    '(click)': 'onClick()',
   },
 })
 export class ControlComponent {
   label = input<string>();
+  private el = inject(ElementRef);
+
+  @HostListener('click') onClick() {
+    console.log('clicked');
+    console.log(this.el);
+  }
 }
