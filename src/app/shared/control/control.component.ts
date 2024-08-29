@@ -7,6 +7,8 @@ import {
   ElementRef,
   contentChild,
   AfterContentInit,
+  afterRender,
+  afterNextRender,
 } from '@angular/core';
 
 @Component({
@@ -28,6 +30,16 @@ export class ControlComponent implements AfterContentInit {
     contentChild.required<ElementRef<HTMLInputElement | HTMLTextAreaElement>>(
       'input'
     );
+
+  constructor() {
+    afterRender(() => {
+      console.log('afterRender');
+    });
+
+    afterNextRender(() => {
+      console.log('afterNextRender');
+    });
+  }
 
   ngAfterContentInit() {
     console.log('After content init');
