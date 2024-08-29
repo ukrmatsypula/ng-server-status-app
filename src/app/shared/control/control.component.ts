@@ -5,6 +5,7 @@ import {
   HostListener,
   inject,
   ElementRef,
+  contentChild,
 } from '@angular/core';
 
 @Component({
@@ -22,9 +23,16 @@ import {
 export class ControlComponent {
   label = input<string>();
   private el = inject(ElementRef);
+  private control =
+    contentChild.required<ElementRef<HTMLInputElement | HTMLTextAreaElement>>(
+      'input'
+    );
 
   @HostListener('click') onClick() {
     console.log('clicked');
     console.log(this.el);
+
+    console.log(this.control());
+    
   }
 }
