@@ -6,6 +6,7 @@ import {
   inject,
   ElementRef,
   contentChild,
+  AfterContentInit,
 } from '@angular/core';
 
 @Component({
@@ -20,7 +21,7 @@ import {
     '(click)': 'onClick()',
   },
 })
-export class ControlComponent {
+export class ControlComponent implements AfterContentInit {
   label = input<string>();
   private el = inject(ElementRef);
   private control =
@@ -28,11 +29,16 @@ export class ControlComponent {
       'input'
     );
 
+  ngAfterContentInit() {
+    console.log('After content init');
+
+    console.log(this.control());
+  }
+
   @HostListener('click') onClick() {
     console.log('clicked');
     console.log(this.el);
 
     console.log(this.control());
-    
   }
 }
