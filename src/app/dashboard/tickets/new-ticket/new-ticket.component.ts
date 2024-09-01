@@ -19,8 +19,8 @@ import { ControlComponent } from '../../../shared/control/control.component';
 })
 export class NewTicketComponent implements AfterViewInit {
   private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
-  enteredTitle = '222';
-  enteredText = '111';
+  enteredTitle = '';
+  enteredText = '';
   add = output<{ title: string; text: string }>();
 
   ngOnInit() {
@@ -34,6 +34,10 @@ export class NewTicketComponent implements AfterViewInit {
   }
 
   onSubmit() {
+    if (!this.enteredTitle.length || !this.enteredText.length) {
+      alert('Please enter the all fields for ticket');
+      return;
+    }
     this.add.emit({ title: this.enteredTitle, text: this.enteredText });
 
     this.enteredTitle = '';
