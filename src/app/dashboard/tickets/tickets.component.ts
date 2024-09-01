@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NewTicketComponent } from './new-ticket/new-ticket.component';
 import type { Ticket } from './ticket/ticket.model';
-import { TicketComponent } from "./ticket/ticket.component";
+import { TicketComponent } from './ticket/ticket.component';
 
 @Component({
   selector: 'app-tickets',
@@ -16,7 +16,7 @@ export class TicketsComponent {
   onAdd(ticketData: { title: string; text: string }) {
     const ticket: Ticket = {
       id: crypto.randomUUID.toString(),
-      title: ticketData.text,
+      title: ticketData.title,
       request: ticketData.text,
       status: 'open',
     };
@@ -24,18 +24,16 @@ export class TicketsComponent {
     this.tickets.push(ticket);
   }
 
-  onCloseTicketMethod(id: string){
-    this.tickets = this.tickets.map(ticket => {
-      if(ticket.id === id){
+  onCloseTicketMethod(id: string) {
+    this.tickets = this.tickets.map((ticket) => {
+      if (ticket.id === id) {
         return {
           ...ticket,
-          status: ticket.status = 'closed'
-        }
+          status: (ticket.status = 'closed'),
+        };
       }
 
-      return ticket
-    }
-
-    )
+      return ticket;
+    });
   }
 }
